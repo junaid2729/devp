@@ -1,0 +1,68 @@
+/* Main section styling */
+.section2 {
+    display: flex;
+    justify-content: center; /* Center the grid in the section */
+    padding: 20px;
+  }
+  
+  /* Container for the grid layout */
+  .container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* Four items per row */
+    gap: 20px; /* Space between items */
+  }
+  
+  /* Styling for each truck item */
+  .items {
+    display: flex;
+    flex-direction: column; /* Keeps the image and button stacked vertically */
+    align-items: center;
+    min-width: 150px; /* Set a minimum width for each truck item */
+  }
+  
+  /* Styling for truck images */
+  .items .img img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    object-fit: cover;
+    cursor: pointer;
+  }
+  
+  /* Button styling under each truck */
+  .items .info button {
+    margin-top: 10px;
+    padding: 8px 12px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  /* Hover effect for buttons */
+  .items .info button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* BOOK NOW button styling */
+  .book {
+    grid-column: span 4; /* Stretch the BOOK NOW button across all columns */
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .book a button {
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .book a button:hover {
+    background-color: #218838;
+  }
+  
