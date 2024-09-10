@@ -1,10 +1,12 @@
 // frontend/src/components/Register.js
 import { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
-import './register.css'; // Import the CSS file
+import { useNavigate } from 'react-router-dom'; // Use useNavigate from react-router-dom
+import './register.css';
 
 const Register = () => {
   const { register } = useAuth();
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -14,6 +16,8 @@ const Register = () => {
     password: '',
     confirmPassword: '',
   });
+  const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -24,15 +28,20 @@ const Register = () => {
     const { password, confirmPassword, ...rest } = formData;
 
     if (password !== confirmPassword) {
-      alert('Passwords do not match');
+      setError('Passwords do not match');
       return;
     }
 
     try {
-      await register(rest.username, password, rest.email, rest.phone);
-      alert('Registration successful');
+      await register(rest.firstName, rest.lastName, rest.username, rest.email, rest.phone, password);
+      setSuccess('Registration successful. Redirecting to login...');
+      setError('');
+      setTimeout(() => {
+        navigate('/login'); // Automatically redirect to login page after success
+      }, 2000); // Adjust the time as needed or remove if immediate redirect is preferred
     } catch (error) {
-      alert('Registration failed');
+      setError('Registration failed');
+      setSuccess('');
     }
   };
 
@@ -96,6 +105,8 @@ const Register = () => {
         required
       />
       <button type="submit">Register</button>
+      {success && <p style={{ color: 'green' }}>{success}</p>}
+      {error && <p style={{ color: 'red' }}>{error}</p>}
     </form>
   );
 };

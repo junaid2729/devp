@@ -1,31 +1,41 @@
 // frontend/src/components/Navbar.js
 import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import './navbar.css'; // Import the CSS file
+import './navbar.css';
 
 const Navbar = () => {
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
+
+  // Handle logout function
+  const handleLogout = async () => {
+    try {
+      logout(); // Call the logout function from AuthContext
+      alert('You have been logged out.');
+    } catch (error) {
+      console.error('Logout failed:', error);
+    }
+  };
 
   return (
     <nav className="navbar">
       <div className="navbar-left">
-        <Link to="/Home" className="navbar-link">Home</Link>
-        <Link to="/ComPage" className="navbar-link">ComPage</Link>
+        <Link to="/home" className="navbar-link">Home</Link>
+        <Link to="/comPage" className="navbar-link">ComPage</Link>
         <Link to="/about" className="navbar-link">About Us</Link>
         <Link to="/contact" className="navbar-link">Contact</Link>
       </div>
-      {/* Centered Heading */}
       <div className="navbar-center">
         <h1 className="navbar-heading">Transportation Service</h1>
       </div>
       <div className="navbar-right">
+        {/* Conditionally render Logout button if user is logged in */}
         {user ? (
-          <Link to="/dashboard" className="navbar-link">Dashboard</Link>
+          <button onClick={handleLogout} className="navbar-link">
+            Logout
+          </button>
         ) : (
-          <>
-            <Link to="/login" className="navbar-link">Login</Link>
-            <Link to="/register" className="navbar-link">Register</Link>
-          </>
+          // Show Sign up link if no user is logged in
+          <Link to="/login" className="navbar-link">Sign up</Link>
         )}
       </div>
     </nav>

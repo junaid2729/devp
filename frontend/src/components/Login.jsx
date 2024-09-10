@@ -1,20 +1,25 @@
 // frontend/src/components/Login.js
 import { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
-import './login.css'; // Import the CSS file
+import { useNavigate, Link } from 'react-router-dom'; // Import Link for navigation
+import './login.css';
 
 const Login = () => {
   const { login } = useAuth();
+  const navigate = useNavigate();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       await login(username, password);
       alert('Login successful');
+      setError('');
+      navigate('/'); // Redirect to the desired landing page
     } catch (error) {
-      alert('Invalid credentials');
+      setError('Invalid credentials');
     }
   };
 
@@ -36,6 +41,13 @@ const Login = () => {
         required
       />
       <button type="submit">Login</button>
+      {error && <p style={{ color: 'red' }}>{error}</p>}
+      
+      {/* Create Account Link */}
+      <p>
+        Don't have an account?{' '}
+        <Link to="/register" className="create-account-link">Create Account</Link>
+      </p>
     </form>
   );
 };

@@ -1,16 +1,14 @@
-// backend/config/db.js
 const mongoose = require('mongoose');
 
 const connectDB = async () => {
   try {
-    // Correct connection string without PORT specification
-    await mongoose.connect('mongodb://localhost:27017/Clgproject', {
+    await mongoose.connect(process.env.MONGODB_URI, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
-    console.log('MongoDB connected to Clgproject');
+    console.log('MongoDB connected to clgproject');
   } catch (error) {
-    console.error(`Error: ${error.message}`);
+    console.error('Error connecting to MongoDB:', error.message);
     process.exit(1);
   }
 };
