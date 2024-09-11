@@ -1,50 +1,52 @@
-// frontend/src/components/Home.js
 import React from 'react';
-import './home.css'; // Import the CSS file for styling
-import assets from './assets/truck.jpg'; // Correctly import the truck image
+import './home.css';
 
-// Array of truck data with correct image reference
-const trucks = [
-  { id: 1, name: 'Truck no 1', img: assets },
-  { id: 2, name: 'Truck no 2', img: assets },
-  { id: 3, name: 'Truck no 3', img: assets },
-  { id: 4, name: 'Truck no 4', img: assets },
-  { id: 5, name: 'Truck no 5', img: assets },
-  { id: 6, name: 'Truck no 6', img: assets },
-  { id: 7, name: 'Truck no 7', img: assets },
-  { id: 8, name: 'Truck no 8', img: assets },
-];
+// Import images with .jpg extension
+import delhiImg from '../components/assets/delhi.jpg';
+import gujaratImg from '../components/assets/gujarat.jpg';
+import rajasthanImg from '../components/assets/Rajasthan.jpg';
+import biharImg from '../components/assets/Bihar.jpg';
+import karnatakaImg from '../components/assets/karnataka.jpg';
+import kashmirImg from '../components/assets/kashmir.jpg';
 
 const Home = () => {
+  const states = [
+    { name: 'Delhi', img: delhiImg },
+    { name: 'Gujarat', img: gujaratImg },
+    { name: 'Rajasthan', img: rajasthanImg },
+    { name: 'Bihar', img: biharImg },
+    { name: 'Karnataka', img: karnatakaImg },
+    { name: 'Kashmir', img: kashmirImg },
+  ];
+
   return (
     <div className="home">
-      {/* <h1>Welcome to Our Website</h1>
-      <p>Please register or login to continue.</p> */}
+      {/* <header className="header">
+        <h1>Welcome to Our Transportation Services</h1>
+        <p>Reliable pickup and drop services across six states of India.</p>
+      </header> */}
 
-      {/* Truck Section */}
-      <section className="section">
-        <div className="section2">
-          <div className="container">
-            {trucks.map((truck) => (
-              <div key={truck.id} className="items">
-                <div className={`img img${truck.id}`}>
-                  <a href="#" target="_parent">
-                    <img src={truck.img} alt={truck.name} />
-                  </a>
-                </div>
-                <div className="info">
-                  <button>{truck.name}</button>
-                </div>
-                <div className="parainfo"></div>
-              </div>
-            ))}
-            <div className="book">
-              <a href="#">
-                <button>BOOK NOW</button>
-              </a>
+      <section className="services">
+        <h2>Our Services</h2>
+        <div className="states">
+          {states.map((state, index) => (
+            <div className="state-card" key={index}>
+              <img src={state.img} alt={state.name} />
+              <h3>{state.name}</h3>
+              <p>We provide fast and safe delivery services in {state.name}.</p>
             </div>
-          </div>
+          ))}
         </div>
+      </section>
+
+      <section className="cta">
+        <h2>Why Choose Us?</h2>
+        <p>
+          We are committed to providing the best transportation services with our fleet of
+          trucks operating in Delhi, Gujarat, Rajasthan, Bihar, Karnataka, and Kashmir.
+          Contact us today to schedule your delivery!
+        </p>
+        <button className="cta-button">Get a Quote</button>
       </section>
     </div>
   );

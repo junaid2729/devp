@@ -83,6 +83,50 @@ app.post('/api/auth/login', async (req, res) => {
   }
 });
 
+// Fetch all users
+app.get('/api/users', async (req, res) => {
+  try {
+    const users = await User.find({}, '-password'); // Exclude password from response for security
+    res.status(200).json(users);
+  } catch (error) {
+    res.status(500).json({ message: 'Error fetching users', error: error.message });
+  }
+});
+
+const Booking = require('./models/Booking');
+
+// Create a booking
+app.post('/api/bookings', async (req, res) => {
+  const { username, pickupLocation, dropLocation, goodsType, weight, date, time, price } = req.body;
+
+  try {
+    const booking = new Booking({
+      username,
+      pickupLocation,
+      dropLocation,
+      goodsType,
+      weight,
+      date,
+      time,
+      price,
+    });
+
+    await booking.save();
+    res.status(201).json({ message: 'Booking created successfully', booking });
+  } catch (error) {
+    res.status(500).json({ message: 'Error creating booking', error: error.message });
+  }
+});
+
+// Get all bookings
+app.get('/api/bookings', async (req, res) => {
+  try {
+    const bookings = await Booking.find();
+    res.status(200).json(bookings);
+  } catch (error) {
+    res.status(500).json({ message: 'Error fetching bookings', error: error.message });
+  }
+});
 // Set the port to the value specified in the .env file or default to 3001
 const PORT = process.env.PORT || 3001;
 

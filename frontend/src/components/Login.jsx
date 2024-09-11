@@ -15,7 +15,7 @@ const Login = () => {
     e.preventDefault();
     try {
       await login(username, password);
-      alert('Login successful');
+      // alert('Login successful');
       setError('');
       navigate('/'); // Redirect to the desired landing page
     } catch (error) {

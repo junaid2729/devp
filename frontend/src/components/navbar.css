@@ -35,3 +35,24 @@
 .navbar-link:hover {
   color: #f3a807;
 }
+.navbar-welcome {
+  font-size: 14px;
+  color: #ddd; /* Light grey color */
+}
+
+/* Logout button styles */
+.logout-button {
+  background-color: #e63946; /* Red background for logout button */
+  color: #fff;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-size: 14px;
+}
+
+/* Logout button hover effect */
+.logout-button:hover {
+  background-color: #d62828; /* Darker red on hover */
+}

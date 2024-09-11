@@ -1,6 +1,5 @@
 // src/context/AuthContext.js
-
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 import axios from 'axios';
 
 // Create the AuthContext
@@ -13,6 +12,30 @@ export const useAuth = () => useContext(AuthContext);
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
 
+  // Function to load user from local storage when the app initializes
+  const loadUserFromToken = async () => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      try {
+        // Fetch user details based on the token
+        const response = await axios.get('http://localhost:3001/api/auth/me', {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        setUser(response.data.user); // Set the user data from the response
+      } catch (error) {
+        console.error('Error loading user from token:', error);
+        logout(); // Log out if token is invalid or expired
+      }
+    }
+  };
+
+  // Call loadUserFromToken on component mount
+  useEffect(() => {
+    loadUserFromToken();
+  }, []);
+
   // Register function
   const register = async (firstName, lastName, username, email, phone, password) => {
     try {
@@ -24,11 +47,10 @@ export const AuthProvider = ({ children }) => {
         phone,
         password,
       });
-      // Do not set the user state here; registration is just for creating the account
-      // You can optionally add a success message or handle redirection after registration
+      alert('Registration successful! Please log in.');
     } catch (error) {
       console.error('Registration failed:', error);
-      // Handle error appropriately (e.g., set error state)
+      alert('Registration failed! Please try again.');
     }
   };
 
@@ -39,19 +61,20 @@ export const AuthProvider = ({ children }) => {
         username,
         password,
       });
-      setUser(response.data.user); // Set the user state only on login
-      localStorage.setItem('token', response.data.token); // Save the token for authentication
+      setUser(response.data.user); // Set the logged-in user
+      localStorage.setItem('token', response.data.token); // Save token in local storage
+      // alert('Login successful!');
     } catch (error) {
       console.error('Login failed:', error);
-      // Handle error appropriately (e.g., set error state)
+      alert('Login failed! Please check your credentials.');
     }
   };
 
   // Logout function
   const logout = () => {
-    setUser(null); // Clear user state
-    localStorage.removeItem('token'); // Remove any stored tokens
-    // Add any additional logout handling here, such as notifying the server
+    setUser(null);
+    localStorage.removeItem('token'); // Remove token from local storage
+    // alert('Logged out successfully.');
   };
 
   // Auth context value
@@ -59,7 +82,7 @@ export const AuthProvider = ({ children }) => {
     user,
     register,
     login,
-    logout, // Include the logout function in the context value
+    logout,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

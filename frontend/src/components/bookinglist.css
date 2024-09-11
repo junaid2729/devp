@@ -1,0 +1,20 @@
+.booking-list-container {
+    padding: 20px;
+  }
+  
+  .booking-list-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .booking-list-table th,
+  .booking-list-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+  
+  .booking-list-table th {
+    background-color: #f4f4f4;
+    text-align: left;
+  }
+  

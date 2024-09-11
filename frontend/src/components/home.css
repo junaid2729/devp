@@ -1,68 +1,99 @@
-/* Main section styling */
-.section2 {
-    display: flex;
-    justify-content: center; /* Center the grid in the section */
-    padding: 20px;
-  }
-  
-  /* Container for the grid layout */
-  .container {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr); /* Four items per row */
-    gap: 20px; /* Space between items */
-  }
-  
-  /* Styling for each truck item */
-  .items {
-    display: flex;
-    flex-direction: column; /* Keeps the image and button stacked vertically */
-    align-items: center;
-    min-width: 150px; /* Set a minimum width for each truck item */
-  }
-  
-  /* Styling for truck images */
-  .items .img img {
-    width: 100%;
-    height: auto;
-    border-radius: 8px;
-    object-fit: cover;
-    cursor: pointer;
-  }
-  
-  /* Button styling under each truck */
-  .items .info button {
-    margin-top: 10px;
-    padding: 8px 12px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  /* Hover effect for buttons */
-  .items .info button:hover {
-    background-color: #0056b3;
-  }
-  
-  /* BOOK NOW button styling */
-  .book {
-    grid-column: span 4; /* Stretch the BOOK NOW button across all columns */
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-  }
-  
-  .book a button {
-    padding: 10px 20px;
-    background-color: #28a745;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .book a button:hover {
-    background-color: #218838;
-  }
-  
+.home {
+  font-family: Arial, sans-serif;
+  color: #333;
+  padding: 20px;
+}
+
+/* .header {
+  text-align: center;
+  background-color: #004d99;
+  color: #fff;
+  padding: 40px 0;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 2.5em;
+} */
+
+/* .header p {
+  font-size: 1.2em;
+  margin-top: 10px;
+} */
+
+.services {
+  margin-top: 10px;
+}
+
+.services h2 {
+  text-align: center;
+  font-size: 2em;
+  margin-bottom: 20px;
+}
+
+.states {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.state-card {
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  margin: 10px;
+  padding: 20px;
+  width: 300px;
+}
+
+.state-card img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.state-card h3 {
+  margin-top: 15px;
+  font-size: 1.5em;
+  color: #004d99;
+}
+
+.state-card p {
+  margin-top: 10px;
+  font-size: 1em;
+  color: #555;
+}
+
+.cta {
+  text-align: center;
+  /* background-color: #004d99; */
+  color: #0a0a0a;
+  padding: 40px 20px;
+  margin-top: 40px;
+  border-radius: 8px;
+}
+
+.cta h2 {
+  margin-bottom: 20px;
+  font-size: 2em;
+}
+
+.cta p {
+  font-size: 1.2em;
+  margin-bottom: 30px;
+}
+
+.cta-button {
+  background-color: #ff9900;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.2em;
+  cursor: pointer;
+}
+
+.cta-button:hover {
+  background-color: #e68a00;
+}
