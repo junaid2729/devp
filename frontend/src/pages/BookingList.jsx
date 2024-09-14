@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import './bookinglist.css'; // Create a CSS file for styling
+import './bookinglist.css'; // Ensure this file exists and is properly styled
 
 const BookingList = () => {
   const [bookings, setBookings] = useState([]);

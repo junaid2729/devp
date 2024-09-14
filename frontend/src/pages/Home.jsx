@@ -1,13 +1,14 @@
 import React from 'react';
+import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 import './home.css';
 
 // Import images with .jpg extension
-import delhiImg from '../components/assets/delhi.jpg';
-import gujaratImg from '../components/assets/gujarat.jpg';
-import rajasthanImg from '../components/assets/Rajasthan.jpg';
-import biharImg from '../components/assets/Bihar.jpg';
-import karnatakaImg from '../components/assets/karnataka.jpg';
-import kashmirImg from '../components/assets/kashmir.jpg';
+import delhiImg from '../pages/assets/delhi.jpg';
+import gujaratImg from '../pages/assets/gujarat.jpg';
+import rajasthanImg from '../pages/assets/Rajasthan.jpg';
+import biharImg from '../pages/assets/Bihar.jpg';
+import karnatakaImg from '../pages/assets/karnataka.jpg';
+import kashmirImg from '../pages/assets/kashmir.jpg';
 
 const Home = () => {
   const states = [
@@ -46,7 +47,9 @@ const Home = () => {
           trucks operating in Delhi, Gujarat, Rajasthan, Bihar, Karnataka, and Kashmir.
           Contact us today to schedule your delivery!
         </p>
-        <button className="cta-button">Get a Quote</button>
+        <Link to="/contact" className="cta-link">
+          <button className="cta-button">Book service</button>
+        </Link>      
       </section>
     </div>
   );

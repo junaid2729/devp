@@ -12,7 +12,7 @@ dotenv.config();
 // MongoDB connection
 const connectDB = async () => {
   try {
-    await mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/Clgproject', {
+    await mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/Clpproject', {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
@@ -62,6 +62,7 @@ app.post('/api/auth/register', async (req, res) => {
   }
 });
 
+
 // Login user
 app.post('/api/auth/login', async (req, res) => {
   const { username, password } = req.body;
@@ -92,6 +93,7 @@ app.get('/api/users', async (req, res) => {
     res.status(500).json({ message: 'Error fetching users', error: error.message });
   }
 });
+
 
 const Booking = require('./models/Booking');
 

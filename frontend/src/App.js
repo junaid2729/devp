@@ -1,14 +1,14 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
-import Navbar from './components/Navbar';
-import Home from './components/Home';
-import Login from './components/Login';
-import Register from './components/Register';
-import Footer from './components/Footer';
-import ComPage from './components/ComPage';
-import UserList from './components/UserList'; // Ensure filename matches the import
-import Contact from './components/Contact'; // Ensure filename matches the import
-import BookingList from './components/Bookinglist'; // Ensure filename matches the import
+import Navbar from './pages/Navbar';
+import Home from './pages/Home';
+import Login from './pages/Login';
+import Register from './pages/Register';
+import Footer from './pages/Footer';
+// import ComPage from './pages/ComPage';
+import UserList from './pages/UserList';
+import Contact from './pages/Contact';
+import BookingList from './pages/BookingList';
 
 function App() {
   return (
@@ -16,17 +16,16 @@ function App() {
       <Router>
         <Navbar />
         <Routes>
-          <Route path="/" element={<Navigate to="/Home" />} /> {/* Default route */}
-          <Route path="/Home" element={<Home />} />
+          <Route path="/" element={<Navigate to="/home" />} /> {/* Default route */}
+          <Route path="/home" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/ComPage" element={<ComPage />} />
-          <Route path="/users" element={<UserList />} /> {/* Route for UserList */}
-          <Route path="/bookinglist" element={<BookingList />} /> {/* Correct route for BookingList */}
-          <Route path="/contact" element={<Contact />} /> {/* Route for Contact */}
-          {/* Add more protected routes here if needed */}
+          {/* <Route path="/comPage" element={<ComPage />} /> */}
+          <Route path="/users" element={<UserList />} />
+          <Route path="/bookinglist" element={<BookingList />} />
+          <Route path="/contact" element={<Contact />} />
         </Routes>
-        <Footer /> {/* Add Footer here to appear on all pages */}
+        <Footer />
       </Router>
     </AuthProvider>
   );

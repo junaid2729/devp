@@ -1,7 +1,7 @@
 // frontend/src/components/Login.js
 import { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
-import { useNavigate, Link } from 'react-router-dom'; // Import Link for navigation
+import { useNavigate, Link } from 'react-router-dom';
 import './login.css';
 
 const Login = () => {
@@ -15,7 +15,6 @@ const Login = () => {
     e.preventDefault();
     try {
       await login(username, password);
-      // alert('Login successful');
       setError('');
       navigate('/'); // Redirect to the desired landing page
     } catch (error) {
@@ -42,11 +41,12 @@ const Login = () => {
       />
       <button type="submit">Login</button>
       {error && <p style={{ color: 'red' }}>{error}</p>}
-      
-      {/* Create Account Link */}
+
       <p>
         Don't have an account?{' '}
-        <Link to="/register" className="create-account-link">Create Account</Link>
+        <Link to="/register" className="create-account-link">
+          Create Account
+        </Link>
       </p>
     </form>
   );
