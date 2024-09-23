@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
 import axios from 'axios';
+import Invoice from './Invoice'; // Import the Invoice component
 import './contact.css';
 
 const Contact = () => {
   const { user } = useAuth();
   const [pickupLocation, setPickupLocation] = useState('');
   const [dropLocation, setDropLocation] = useState('');
-  const [pickupPhone, setPickupPhone] = useState(''); // New state for pickup phone
-  const [dropPhone, setDropPhone] = useState(''); // New state for drop phone
+  const [pickupPhone, setPickupPhone] = useState('');
+  const [dropPhone, setDropPhone] = useState('');
   const [goodsType, setGoodsType] = useState('');
   const [weight, setWeight] = useState('');
   const [date, setDate] = useState('');
@@ -16,6 +17,7 @@ const Contact = () => {
   const [price, setPrice] = useState(0);
   const [email, setEmail] = useState(user?.email || '');
   const [username, setUsername] = useState(user?.username || '');
+  const [bookingConfirmed, setBookingConfirmed] = useState(false); // New state for booking confirmation
 
   useEffect(() => {
     if (user) {
@@ -67,23 +69,39 @@ const Contact = () => {
         username,
         pickupLocation,
         dropLocation,
-        pickupPhone, // Include pickup phone number in booking data
-        dropPhone, // Include drop phone number in booking data
+        pickupPhone,
+        dropPhone,
         goodsType,
         weight,
         date,
         time,
         price,
-        email, // Include email in booking data
+        email,
       });
 
       alert(
         `Booking Confirmed! \nUsername: ${username} \nEmail: ${email}\nPickup: ${pickupLocation}\nPickup Phone: ${pickupPhone}\nDrop: ${dropLocation}\nDrop Phone: ${dropPhone}\nGoods Type: ${goodsType}\nWeight: ${weight}\nDate: ${date}\nTime: ${time}\nPrice: ₹${price}`
       );
+
+      setBookingConfirmed(true); // Set booking confirmed to true
     } catch (error) {
       console.error('Error creating booking:', error);
       alert('Error creating booking. Please try again.');
     }
+  };
+
+  const bookingData = {
+    username,
+    email,
+    pickupLocation,
+    pickupPhone,
+    dropLocation,
+    dropPhone,
+    goodsType,
+    weight,
+    date,
+    time,
+    price,
   };
 
   return (
@@ -125,7 +143,7 @@ const Contact = () => {
             onChange={(e) => setPickupPhone(e.target.value)}
             required
             placeholder="Enter pickup phone number"
-            pattern="[0-9]{10}" // Add pattern for 10-digit phone number
+            pattern="[0-9]{10}"
             title="Enter a 10-digit phone number"
           />
         </div>
@@ -146,7 +164,7 @@ const Contact = () => {
             onChange={(e) => setDropPhone(e.target.value)}
             required
             placeholder="Enter drop phone number"
-            pattern="[0-9]{10}" // Add pattern for 10-digit phone number
+            pattern="[0-9]{10}"
             title="Enter a 10-digit phone number"
           />
         </div>
@@ -211,6 +229,8 @@ const Contact = () => {
           </button>
         </div>
       </form>
+
+      {bookingConfirmed && <Invoice bookingData={bookingData} />} {/* Render Invoice on confirmation */}
     </div>
   );
 };
