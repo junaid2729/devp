@@ -5,6 +5,11 @@ const BookingSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  email: {
+    type: String,
+    required: true,
+    match: /.+\@.+\..+/ // Optional: Regular expression to validate email format
+  },
   pickupLocation: {
     type: String,
     required: true,

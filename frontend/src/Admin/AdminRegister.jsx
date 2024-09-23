@@ -1,47 +1,43 @@
-// components/AdminRegister.js
 import React, { useState } from 'react';
-import { useAdminAuth } from '../contexts/AdminAuthContext';
+import axios from 'axios';
 
 const AdminRegister = () => {
-  const { register, error } = useAdminAuth();
   const [username, setUsername] = useState('');
-  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    register(username, email, password);
+    try {
+      const response = await axios.post('http://localhost:3001/api/admin/register', {
+        username,
+        password,
+      });
+      alert(response.data.message);
+    } catch (error) {
+      console.error('Registration failed:', error);
+      alert('Registration failed! Please try again.');
+    }
   };
 
   return (
-    <div>
-      <h2>Admin Register</h2>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="Username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          required
-        />
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-        <button type="submit">Register</button>
-        {error && <p style={{ color: 'red' }}>{error}</p>}
-      </form>
-    </div>
+    <form onSubmit={handleSubmit}>
+      <h2>Admin Registration</h2>
+      <input
+        type="text"
+        placeholder="Username"
+        value={username}
+        onChange={(e) => setUsername(e.target.value)}
+        required
+      />
+      <input
+        type="password"
+        placeholder="Password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        required
+      />
+      <button type="submit">Register</button>
+    </form>
   );
 };
 

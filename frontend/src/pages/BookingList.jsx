@@ -25,6 +25,7 @@ const BookingList = () => {
         <thead>
           <tr>
             <th>Username</th>
+            <th>Email</th>
             <th>Pickup Location</th>
             <th>Drop Location</th>
             <th>Goods Type</th>
@@ -38,6 +39,7 @@ const BookingList = () => {
           {bookings.map((booking) => (
             <tr key={booking._id}>
               <td>{booking.username}</td>
+              <td>{booking.email}</td>
               <td>{booking.pickupLocation}</td>
               <td>{booking.dropLocation}</td>
               <td>{booking.goodsType}</td>

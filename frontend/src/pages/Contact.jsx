@@ -1,31 +1,32 @@
 import React, { useState, useEffect } from 'react';
-import { useAuth } from '../context/AuthContext'; // Import the AuthContext
-import axios from 'axios'; // Import axios for HTTP requests
+import { useAuth } from '../context/AuthContext';
+import axios from 'axios';
 import './contact.css';
 
 const Contact = () => {
-  const { user } = useAuth(); // Get the user from AuthContext
+  const { user } = useAuth();
   const [pickupLocation, setPickupLocation] = useState('');
   const [dropLocation, setDropLocation] = useState('');
+  const [pickupPhone, setPickupPhone] = useState(''); // New state for pickup phone
+  const [dropPhone, setDropPhone] = useState(''); // New state for drop phone
   const [goodsType, setGoodsType] = useState('');
   const [weight, setWeight] = useState('');
   const [date, setDate] = useState('');
   const [time, setTime] = useState('');
   const [price, setPrice] = useState(0);
-
-  // Set the username automatically from the context
+  const [email, setEmail] = useState(user?.email || '');
   const [username, setUsername] = useState(user?.username || '');
 
-  // Update the username whenever the user object changes
   useEffect(() => {
     if (user) {
       setUsername(user.username);
+      setEmail(user.email);
     }
   }, [user]);
 
   const calculatePrice = () => {
     if (!weight) {
-      setPrice(0); // Show 0 price if no weight is selected
+      setPrice(0);
       return;
     }
 
@@ -33,20 +34,19 @@ const Contact = () => {
     const distanceFactor = pickupLocation === dropLocation ? 0.8 : 1;
     const typeFactor = goodsType === 'Fragile' ? 1.5 : 1;
 
-    // Calculate weight price increment
-    let weightIncrement = 500; // Base increment price per 500kg
-    let weightFactor = 0; // Start with no additional cost
+    let weightIncrement = 500;
+    let weightFactor = 0;
 
     if (weight === '0-500kg') {
-      weightFactor = 1; // Start with 500 for 0-500kg
+      weightFactor = 1;
     } else if (weight === '500-1000kg') {
-      weightFactor = 2; // Increment to 1000 for 500-1000kg
+      weightFactor = 2;
     } else if (weight === '1000-1500kg') {
-      weightFactor = 3; // Increment to 1500 for 1000-1500kg
+      weightFactor = 3;
     } else if (weight === '1500-2000kg') {
-      weightFactor = 4; // Increment to 2000 for 1500-2000kg
+      weightFactor = 4;
     } else if (weight === 'Over 2000kg') {
-      weightFactor = 5; // Increment to 2500 for over 2000kg
+      weightFactor = 5;
     }
 
     const calculatedWeightPrice = weightFactor * weightIncrement;
@@ -67,15 +67,18 @@ const Contact = () => {
         username,
         pickupLocation,
         dropLocation,
+        pickupPhone, // Include pickup phone number in booking data
+        dropPhone, // Include drop phone number in booking data
         goodsType,
         weight,
         date,
         time,
-        price
+        price,
+        email, // Include email in booking data
       });
 
       alert(
-        `Booking Confirmed! \nUsername: ${username}\nPickup: ${pickupLocation}\nDrop: ${dropLocation}\nGoods Type: ${goodsType}\nWeight: ${weight}\nDate: ${date}\nTime: ${time}\nPrice: ₹${price}`
+        `Booking Confirmed! \nUsername: ${username} \nEmail: ${email}\nPickup: ${pickupLocation}\nPickup Phone: ${pickupPhone}\nDrop: ${dropLocation}\nDrop Phone: ${dropPhone}\nGoods Type: ${goodsType}\nWeight: ${weight}\nDate: ${date}\nTime: ${time}\nPrice: ₹${price}`
       );
     } catch (error) {
       console.error('Error creating booking:', error);
@@ -93,10 +96,18 @@ const Contact = () => {
             type="text"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
-            disabled // Disable input to prevent manual editing
+            disabled
           />
         </div>
-        {/* Other form fields */}
+        <div className="form-group">
+          <label>Email:</label>
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            disabled
+          />
+        </div>
         <div className="form-group">
           <label>Pickup Location:</label>
           <input
@@ -107,12 +118,36 @@ const Contact = () => {
           />
         </div>
         <div className="form-group">
+          <label>Pickup Phone:</label>
+          <input
+            type="tel"
+            value={pickupPhone}
+            onChange={(e) => setPickupPhone(e.target.value)}
+            required
+            placeholder="Enter pickup phone number"
+            pattern="[0-9]{10}" // Add pattern for 10-digit phone number
+            title="Enter a 10-digit phone number"
+          />
+        </div>
+        <div className="form-group">
           <label>Drop Location:</label>
           <input
             type="text"
             value={dropLocation}
             onChange={(e) => setDropLocation(e.target.value)}
             required
+          />
+        </div>
+        <div className="form-group">
+          <label>Drop Phone:</label>
+          <input
+            type="tel"
+            value={dropPhone}
+            onChange={(e) => setDropPhone(e.target.value)}
+            required
+            placeholder="Enter drop phone number"
+            pattern="[0-9]{10}" // Add pattern for 10-digit phone number
+            title="Enter a 10-digit phone number"
           />
         </div>
         <div className="form-group">
@@ -162,11 +197,19 @@ const Contact = () => {
           />
         </div>
         <div className="form-group">
-          <label>Estimated Price: ₹{price}</label>
+          <label>Price:</label>
+          <input
+            type="number"
+            value={price}
+            readOnly
+            required
+          />
         </div>
-        <button type="submit" className="submit-btn">
-          Book Now
-        </button>
+        <div className="form-group">
+          <button type="submit" className="submit-button">
+            Book Now
+          </button>
+        </div>
       </form>
     </div>
   );
