@@ -149,12 +149,17 @@ const Contact = () => {
         </div>
         <div className="form-group">
           <label>Drop Location:</label>
-          <input
-            type="text"
+          <select
             value={dropLocation}
             onChange={(e) => setDropLocation(e.target.value)}
             required
-          />
+          >
+            <option value="">Select Location</option>
+            <option value="Mumbai">Mumbai</option>
+            <option value="Delhi">Delhi</option>
+            <option value="Kolkata">Kolkata</option>
+            <option value="Surat">Surat</option>
+          </select>
         </div>
         <div className="form-group">
           <label>Drop Phone:</label>

@@ -1,8 +1,10 @@
+// Admin/AdminDashboard.js
 import React, { useState } from 'react';
 import UserList from '../pages/UserList'; // Adjust the import path as needed
 import BookingList from '../pages/BookingList'; // Adjust the import path as needed
-import AdminRegister from '../Admin/AdminRegister'; // Import AdminRegister component
-import './adminDashboard.css'; // Create a CSS file for styling
+import AdminRegister from '../Admin/AdminRegister'; // Adjust the import path as needed
+import AdminInvoiceGenerator from '../Admin/AdminInvoiceGenerator'; // Import the new component
+import './adminDashboard.css';
 
 const AdminDashboard = () => {
   const [activePage, setActivePage] = useState('users');
@@ -15,6 +17,8 @@ const AdminDashboard = () => {
         return <BookingList />;
       case 'register':
         return <AdminRegister />;
+      case 'generate-invoice':
+        return <AdminInvoiceGenerator />; // Render the AdminInvoiceGenerator component
       default:
         return <UserList />;
     }
@@ -42,6 +46,12 @@ const AdminDashboard = () => {
             onClick={() => setActivePage('register')}
           >
             Register Admin
+          </li>
+          <li
+            className={activePage === 'generate-invoice' ? 'active' : ''}
+            onClick={() => setActivePage('generate-invoice')}
+          >
+            Generate Invoice
           </li>
         </ul>
       </div>
