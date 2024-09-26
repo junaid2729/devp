@@ -1,8 +1,8 @@
 import React from 'react';
-import { Link } from 'react-router-dom'; // Import Link from react-router-dom
+import { Link } from 'react-router-dom';
 import './home.css';
 
-// Import images with .jpg extension
+// Import images
 import delhiImg from '../pages/assets/delhi.jpg';
 import gujaratImg from '../pages/assets/gujarat.jpg';
 import rajasthanImg from '../pages/assets/Rajasthan.jpg';
@@ -22,10 +22,10 @@ const Home = () => {
 
   return (
     <div className="home">
-      {/* <header className="header">
+      <header className="header">
         <h1>Welcome to Our Transportation Services</h1>
         <p>Reliable pickup and drop services across six states of India.</p>
-      </header> */}
+      </header>
 
       <section className="services">
         <h2>Our Services</h2>
@@ -48,7 +48,7 @@ const Home = () => {
           Contact us today to schedule your delivery!
         </p>
         <Link to="/contact" className="cta-link">
-          <button className="cta-button">Book service</button>
+          <button className="cta-button" aria-label="Book service">Book service</button>
         </Link>      
       </section>
     </div>

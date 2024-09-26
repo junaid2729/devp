@@ -2,25 +2,30 @@
   font-family: Arial, sans-serif;
   color: #333;
   padding: 20px;
+  background-color: #f0f8ff; /* Light blue background */
 }
 
-/* .header {
+/* Header styles */
+.header {
   text-align: center;
-  background-color: #004d99;
-  color: #fff;
+  background-color: #f9fcfd; /* Light blue background */
+  color: #0066cc;
   padding: 40px 0;
+  border-bottom: 5px solid #f3f5f7; /* Lighter blue accent border */
 }
 
 .header h1 {
   margin: 0;
   font-size: 2.5em;
-} */
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
 
-/* .header p {
+.header p {
   font-size: 1.2em;
   margin-top: 10px;
-} */
+}
 
+/* Services section */
 .services {
   margin-top: 10px;
 }
@@ -29,8 +34,10 @@
   text-align: center;
   font-size: 2em;
   margin-bottom: 20px;
+  color: #00509e; /* Lighter blue color */
 }
 
+/* States section */
 .states {
   display: flex;
   justify-content: space-around;
@@ -38,13 +45,21 @@
 }
 
 .state-card {
-  background-color: #f9f9f9;
+  background-color: #ffffff; /* White background */
   border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   text-align: center;
   margin: 10px;
   padding: 20px;
   width: 300px;
+  transition: transform 0.3s, box-shadow 0.3s; /* Smooth hover effects */
+  border: 2px solid #0066cc; /* Blue border around the whole card */
+}
+
+
+.state-card:hover {
+  transform: translateY(-5px); /* Lift effect on hover */
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
 }
 
 .state-card img {
@@ -56,7 +71,7 @@
 .state-card h3 {
   margin-top: 15px;
   font-size: 1.5em;
-  color: #004d99;
+  color: #00509e; /* Lighter blue color */
 }
 
 .state-card p {
@@ -65,18 +80,20 @@
   color: #555;
 }
 
+/* Call to Action section */
 .cta {
   text-align: center;
-  /* background-color: #004d99; */
   color: #0a0a0a;
   padding: 40px 20px;
   margin-top: 40px;
+  background-color: #e6f0ff; /* Light blue background */
   border-radius: 8px;
 }
 
 .cta h2 {
   margin-bottom: 20px;
   font-size: 2em;
+  color: #00509e; /* Lighter blue color */
 }
 
 .cta p {
@@ -85,15 +102,16 @@
 }
 
 .cta-button {
-  background-color: #ff9900;
+  background-color: #0099ff; /* Light blue button */
   color: #fff;
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
   font-size: 1.2em;
   cursor: pointer;
+  transition: background-color 0.3s; /* Smooth color transition */
 }
 
 .cta-button:hover {
-  background-color: #e68a00;
+  background-color: #007acc; /* Slightly darker blue on hover */
 }

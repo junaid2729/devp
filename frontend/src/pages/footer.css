@@ -1,101 +1,108 @@
 footer {
-    display: flex;
-    flex-direction: column;
-    background-color: black;
-    align-items: center;
-    color: white;
-  }
-  
-  .footer0 {
-    font-weight: 1200;
-    transition-duration: 1s;
-  }
-  
-  .footer0:hover {
-    color: rgb(243, 168, 7);
-  }
-  
-  .footer1 {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    color: white;
-    margin-top: 15px;
-  }
-  
-  .social-media {
-    display: flex;
-    justify-content: center;
-    color: white;
-    flex-wrap: wrap;
-  }
-  
-  .social-media a {
-    color: white;
-    margin: 20px;
-    border-radius: 5px;
-    margin-top: 10px;
-  }
-  
-  .social-media a ion-icon {
-    color: white;
-    background-color: black;
-  }
-  
-  .social-media a:hover ion-icon {
-    color: rgb(0, 255, 136);
-    transform: translateY(5px);
-  }
-  
+  display: flex;
+  flex-direction: column;
+  background-color: #0066cc; /* Blue background */
+  align-items: center;
+  color: white; /* White text color */
+  padding: 20px 0; /* Added padding for better spacing */
+}
+
+.footer0 {
+  font-weight: bold; /* Changed to bold for consistency */
+  transition-duration: 0.3s; /* Shortened transition for smoother hover effect */
+}
+
+.footer0:hover {
+  color: #f3a807; /* Gold color on hover */
+}
+
+.footer1 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white; /* White text color */
+  margin-top: 15px;
+}
+
+.social-media {
+  display: flex;
+  justify-content: center;
+  color: white; /* White text color */
+  flex-wrap: wrap;
+}
+
+.social-media a {
+  color: white; /* White link color */
+  margin: 20px;
+  border-radius: 5px;
+  margin-top: 10px;
+  transition: color 0.3s; /* Added transition for hover effect */
+}
+
+.social-media a:hover {
+  color: #f3a807; /* Gold color on hover */
+}
+
+.social-media a ion-icon {
+  color: white; /* White icon color */
+  background-color: rgb(249, 246, 246); /* Retained original for contrast */
+}
+
+.social-media a:hover ion-icon {
+  color: rgb(0, 255, 136); /* Bright green for hover effect */
+  transform: translateY(5px);
+}
+
+.footer2 {
+  display: flex;
+  width: 100%;
+  justify-content: space-evenly;
+  align-items: center;
+  text-decoration: none;
+  flex-wrap: wrap;
+}
+
+.footer2 .heading {
+  font-weight: bold; /* Changed to bold for consistency */
+  font-size: 18px;
+  color: white; /* White heading color */
+}
+
+.footer2 .heading:hover {
+  color: #f3a807; /* Gold color on hover */
+}
+
+.footer2 .div:hover {
+  transform: scale(1.05);
+}
+
+.footer3 {
+  margin-top: 60px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.footer3 h4 {
+  margin: 0 10px;
+  color: white; /* White footer text color */
+}
+
+/* Media queries for responsiveness */
+@media screen and (max-width: 1250px) {
   .footer2 {
-    display: flex;
-    width: 100%;
-    justify-content: space-evenly;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .footer2 {
+    flex-direction: column;
     align-items: center;
-    text-decoration: none;
-    flex-wrap: wrap;
   }
-  
-  .footer2 .heading {
-    font-weight: 900;
-    font-size: 18px;
-  }
-  
-  .footer2 .heading:hover {
-    color: rgb(243, 168, 7);
-  }
-  
-  .footer2 .div:hover {
-    transform: scale(1.05);
-  }
-  
   .footer3 {
-    margin-top: 60px;
-    margin-bottom: 20px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    flex-direction: column;
   }
-  
-  .footer3 h4 {
-    margin: 0 10px;
-  }
-  
-  /* Media queries for responsiveness */
-  @media screen and (max-width: 1250px) {
-    .footer2 {
-      flex-direction: column;
-      align-items: flex-start;
-    }
-  }
-  
-  @media screen and (max-width: 550px) {
-    .footer2 {
-      flex-direction: column;
-      align-items: center;
-    }
-    .footer3 {
-      flex-direction: column;
-    }
-  }
-  
+}
