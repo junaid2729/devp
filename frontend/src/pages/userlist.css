@@ -7,12 +7,14 @@
   border-collapse: collapse;
 }
 
-.user-list-table th, .user-list-table td {
-  border: 1px solid #ddd;
+.user-list-table th,
+.user-list-table td {
+  border: 1px solid #ddd; /* Light gray border */
   padding: 8px;
   text-align: left;
 }
 
 .user-list-table th {
-  background-color: #f2f2f2;
+  background-color: #0066cc; /* Blue header background */
+  color: #ffffff; /* White text */
 }
