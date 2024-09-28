@@ -8,11 +8,11 @@
 }
 
 .booking-list-table th, .booking-list-table td {
-  border: 1px solid #ddd;
+  border: 1px solid #dddddd;
   padding: 8px;
   text-align: left;
 }
 
 .booking-list-table th {
-  background-color: #f2f2f2;
+  background-color:  #0066cc; 
 }

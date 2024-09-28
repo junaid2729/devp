@@ -126,7 +126,7 @@ app.get('/api/bookings', async (req, res) => {
 // Create a booking
 // Create a booking
 app.post('/api/bookings', async (req, res) => {
-  const { username, email, pickupLocation, dropLocation, goodsType, weight, date, time, price } = req.body;
+  const { username, email, pickupLocation, pickupPhone, dropLocation, dropPhone, goodsType, weight, date, time, price } = req.body;
 
   try {
     // Find the number of bookings for the given date
@@ -142,7 +142,9 @@ app.post('/api/bookings', async (req, res) => {
       username,
       email,
       pickupLocation,
+      pickupPhone,
       dropLocation,
+      dropPhone,
       goodsType,
       weight,
       date,

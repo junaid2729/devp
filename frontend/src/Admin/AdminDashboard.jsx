@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import UserList from '../pages/UserList';
 import BookingList from '../pages/BookingList';
 import AdminRegister from '../Admin/AdminRegister';
-import AdminInvoiceGenerator from '../Admin/AdminInvoiceGenerator';
 import TruckManagement from './TruckManagement'; // Import TruckManagement component
 import './adminDashboard.css';
 
@@ -17,8 +16,6 @@ const AdminDashboard = () => {
         return <BookingList />;
       case 'register':
         return <AdminRegister />;
-      case 'generate-invoice':
-        return <AdminInvoiceGenerator />;
       case 'truck-management':
         return <TruckManagement />; // Render the TruckManagement component
       default:
@@ -48,12 +45,6 @@ const AdminDashboard = () => {
             onClick={() => setActivePage('register')}
           >
             Register Admin
-          </li>
-          <li
-            className={activePage === 'generate-invoice' ? 'active' : ''}
-            onClick={() => setActivePage('generate-invoice')}
-          >
-            Generate Invoice
           </li>
           <li
             className={activePage === 'truck-management' ? 'active' : ''}

@@ -15,10 +15,30 @@ const BookingSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    pickupPhone: {
+      type: String,
+      required: true,
+      validate: {
+        validator: function (v) {
+          return /\d{10}/.test(v); // Validate 10-digit phone number
+        },
+        message: props => `${props.value} is not a valid 10-digit phone number!`
+      }
+    },
     dropLocation: {
       type: String,
       required: true,
       enum: ['Mumbai', 'Delhi', 'Kolkata', 'Surat'], // Restrict drop locations
+    },
+    dropPhone: {
+      type: String,
+      required: true,
+      validate: {
+        validator: function (v) {
+          return /\d{10}/.test(v); // Validate 10-digit phone number
+        },
+        message: props => `${props.value} is not a valid 10-digit phone number!`
+      }
     },
     goodsType: {
       type: String,
