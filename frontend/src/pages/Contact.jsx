@@ -63,7 +63,7 @@ const Contact = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     try {
       await axios.post('http://localhost:3001/api/bookings', {
         username,
@@ -78,18 +78,15 @@ const Contact = () => {
         price,
         email,
       });
-
-      alert(
-        `Booking Confirmed! \nUsername: ${username} \nEmail: ${email}\nPickup: ${pickupLocation}\nPickup Phone: ${pickupPhone}\nDrop: ${dropLocation}\nDrop Phone: ${dropPhone}\nGoods Type: ${goodsType}\nWeight: ${weight}\nDate: ${date}\nTime: ${time}\nPrice: ₹${price}`
-      );
-
+  
+      alert('Booking Confirmed!');
       setBookingConfirmed(true); // Set booking confirmed to true
     } catch (error) {
       console.error('Error creating booking:', error);
-      alert('Error creating booking. Please try again.');
+      alert(error.response?.data?.message || 'Error creating booking. Please try again.');
     }
   };
-
+  
   const bookingData = {
     username,
     email,
@@ -107,135 +104,132 @@ const Contact = () => {
   return (
     <div className="contact-us-container">
       <h2>Book a Truck</h2>
-      <form onSubmit={handleSubmit} className="contact-form">
-        <div className="form-group">
-          <label>Username:</label>
-          <input
-            type="text"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            disabled
-          />
-        </div>
-        <div className="form-group">
-          <label>Email:</label>
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            disabled
-          />
-        </div>
-        <div className="form-group">
-          <label>Pickup Location:</label>
-          <input
-            type="text"
-            value={pickupLocation}
-            onChange={(e) => setPickupLocation(e.target.value)}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label>Pickup Phone:</label>
-          <input
-            type="tel"
-            value={pickupPhone}
-            onChange={(e) => setPickupPhone(e.target.value)}
-            required
-            placeholder="Enter pickup phone number"
-            pattern="[0-9]{10}"
-            title="Enter a 10-digit phone number"
-          />
-        </div>
-        <div className="form-group">
-          <label>Drop Location:</label>
-          <select
-            value={dropLocation}
-            onChange={(e) => setDropLocation(e.target.value)}
-            required
-          >
-            <option value="">Select Location</option>
-            <option value="Mumbai">Mumbai</option>
-            <option value="Delhi">Delhi</option>
-            <option value="Kolkata">Kolkata</option>
-            <option value="Surat">Surat</option>
-          </select>
-        </div>
-        <div className="form-group">
-          <label>Drop Phone:</label>
-          <input
-            type="tel"
-            value={dropPhone}
-            onChange={(e) => setDropPhone(e.target.value)}
-            required
-            placeholder="Enter drop phone number"
-            pattern="[0-9]{10}"
-            title="Enter a 10-digit phone number"
-          />
-        </div>
-        <div className="form-group">
-          <label>Type of Goods:</label>
-          <select
-            value={goodsType}
-            onChange={(e) => setGoodsType(e.target.value)}
-            required
-          >
-            <option value="">Select Type</option>
-            <option value="Fragile">Fragile</option>
-            <option value="Solid">Solid</option>
-            <option value="Liquid">Liquid</option>
-          </select>
-        </div>
-        <div className="form-group">
-          <label>Weight:</label>
-          <select
-            value={weight}
-            onChange={(e) => setWeight(e.target.value)}
-            required
-          >
-            <option value="">Select Weight</option>
-            <option value="0-500kg">0-500kg</option>
-            <option value="500-1000kg">500-1000kg</option>
-            <option value="1000-1500kg">1000-1500kg</option>
-            <option value="1500-2000kg">1500-2000kg</option>
-            <option value="Over 2000kg">Over 2000kg</option>
-          </select>
-        </div>
-        <div className="form-group">
-          <label>Date:</label>
-          <input
-            type="date"
-            value={date}
-            onChange={(e) => setDate(e.target.value)}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label>Time:</label>
-          <input
-            type="time"
-            value={time}
-            onChange={(e) => setTime(e.target.value)}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label>Price:</label>
-          <input
-            type="number"
-            value={price}
-            readOnly
-            required
-          />
-        </div>
-        <div className="form-group">
-          <button type="submit" className="submit-button">
-            Book Now
-          </button>
-        </div>
-      </form>
-
-      {bookingConfirmed && <Invoice bookingData={bookingData} />} {/* Render Invoice on confirmation */}
+      {!bookingConfirmed ? (
+        <form onSubmit={handleSubmit} className="contact-form">
+          <div className="form-group">
+            <label>Username:</label>
+            <input
+              type="text"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              disabled
+            />
+          </div>
+          <div className="form-group">
+            <label>Email:</label>
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              disabled
+            />
+          </div>
+          <div className="form-group">
+            <label>Pickup Location:</label>
+            <input
+              type="text"
+              value={pickupLocation}
+              onChange={(e) => setPickupLocation(e.target.value)}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label>Pickup Phone:</label>
+            <input
+              type="tel"
+              value={pickupPhone}
+              onChange={(e) => setPickupPhone(e.target.value)}
+              required
+              placeholder="Enter pickup phone number"
+              pattern="[0-9]{10}"
+              title="Enter a 10-digit phone number"
+            />
+          </div>
+          <div className="form-group">
+            <label>Drop Location:</label>
+            <select
+              value={dropLocation}
+              onChange={(e) => setDropLocation(e.target.value)}
+              required
+            >
+              <option value="">Select Location</option>
+              <option value="Mumbai">Mumbai</option>
+              <option value="Delhi">Delhi</option>
+              <option value="Kolkata">Kolkata</option>
+              <option value="Surat">Surat</option>
+            </select>
+          </div>
+          <div className="form-group">
+            <label>Drop Phone:</label>
+            <input
+              type="tel"
+              value={dropPhone}
+              onChange={(e) => setDropPhone(e.target.value)}
+              required
+              placeholder="Enter drop phone number"
+              pattern="[0-9]{10}"
+              title="Enter a 10-digit phone number"
+            />
+          </div>
+          <div className="form-group">
+            <label>Goods Type:</label>
+            <select
+              value={goodsType}
+              onChange={(e) => setGoodsType(e.target.value)}
+              required
+            >
+              <option value="">Select Goods Type</option>
+              <option value="Fragile">Fragile</option>
+              <option value="Solid">Solid</option>
+              <option value="Liquid">Liquid</option>
+            </select>
+          </div>
+          <div className="form-group">
+            <label>Weight:</label>
+            <select
+              value={weight}
+              onChange={(e) => setWeight(e.target.value)}
+              required
+            >
+              <option value="">Select Weight</option>
+              <option value="0-500kg">0-500kg</option>
+              <option value="500-1000kg">500-1000kg</option>
+              <option value="1000-1500kg">1000-1500kg</option>
+              <option value="1500-2000kg">1500-2000kg</option>
+              <option value="Over 2000kg">Over 2000kg</option>
+            </select>
+          </div>
+          <div className="form-group">
+            <label>Date:</label>
+            <input
+              type="date"
+              value={date}
+              onChange={(e) => setDate(e.target.value)}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label>Time:</label>
+            <input
+              type="time"
+              value={time}
+              onChange={(e) => setTime(e.target.value)}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label>Price:</label>
+            <input
+              type="number"
+              value={price}
+              readOnly
+            />
+          </div>
+          <button type="submit" className="submit-btn">Confirm Booking</button>
+        </form>
+      ) : (
+        <Invoice bookingData={bookingData} /> // Render the Invoice component after booking confirmation
+      )}
     </div>
   );
 };

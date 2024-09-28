@@ -33,6 +33,9 @@ const BookingSchema = new mongoose.Schema(
     date: {
       type: Date,
       required: true,
+      get: function (date) {
+        return date.toISOString().split('T')[0]; // Return only the date part
+      },
     },
     time: {
       type: String,

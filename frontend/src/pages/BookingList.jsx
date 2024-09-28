@@ -4,6 +4,7 @@ import './bookinglist.css'; // Ensure this file exists and is properly styled
 
 const BookingList = () => {
   const [bookings, setBookings] = useState([]);
+  const [loading, setLoading] = useState(true); // Optional loading state
 
   useEffect(() => {
     const fetchBookings = async () => {
@@ -12,6 +13,8 @@ const BookingList = () => {
         setBookings(response.data);
       } catch (error) {
         console.error('Error fetching bookings:', error);
+      } finally {
+        setLoading(false); // Set loading to false after fetching
       }
     };
 
@@ -21,36 +24,40 @@ const BookingList = () => {
   return (
     <div className="booking-list-container">
       <h2>All Bookings</h2>
-      <table className="booking-list-table">
-        <thead>
-          <tr>
-            <th>Username</th>
-            <th>Email</th>
-            <th>Pickup Location</th>
-            <th>Drop Location</th>
-            <th>Goods Type</th>
-            <th>Weight</th>
-            <th>Date</th>
-            <th>Time</th>
-            <th>Price</th>
-          </tr>
-        </thead>
-        <tbody>
-          {bookings.map((booking) => (
-            <tr key={booking._id}>
-              <td>{booking.username}</td>
-              <td>{booking.email}</td>
-              <td>{booking.pickupLocation}</td>
-              <td>{booking.dropLocation}</td>
-              <td>{booking.goodsType}</td>
-              <td>{booking.weight}</td>
-              <td>{new Date(booking.date).toLocaleDateString()}</td>
-              <td>{booking.time}</td>
-              <td>₹{booking.price}</td>
+      {loading ? (
+        <p>Loading bookings...</p>
+      ) : (
+        <table className="booking-list-table">
+          <thead>
+            <tr>
+              <th>Username</th>
+              <th>Email</th>
+              <th>Pickup Location</th>
+              <th>Drop Location</th>
+              <th>Goods Type</th>
+              <th>Weight</th>
+              <th>Date</th>
+              <th>Time</th>
+              <th>Price</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {bookings.map((booking) => (
+              <tr key={booking._id}>
+                <td>{booking.username}</td>
+                <td>{booking.email}</td>
+                <td>{booking.pickupLocation}</td>
+                <td>{booking.dropLocation}</td>
+                <td>{booking.goodsType}</td>
+                <td>{booking.weight}</td>
+                <td>{new Date(booking.date).toLocaleDateString()}</td>
+                <td>{booking.time}</td>
+                <td>₹{booking.price}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      )}
     </div>
   );
 };

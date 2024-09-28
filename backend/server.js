@@ -108,16 +108,36 @@ app.get('/api/users', async (req, res) => {
     res.status(500).json({ message: 'Error fetching users', error: error.message });
   }
 });
+// Fetch all bookings
+app.get('/api/bookings', async (req, res) => {
+  try {
+    const bookings = await Booking.find(); // Retrieve all bookings
+    res.status(200).json(bookings);
+  } catch (error) {
+    console.error('Error fetching bookings:', error.message);
+    res.status(500).json({ message: 'Error fetching bookings', error: error.message });
+  }
+});
 
 // ----------------------------------
 // Booking Routes
 // ----------------------------------
 
 // Create a booking
+// Create a booking
 app.post('/api/bookings', async (req, res) => {
   const { username, email, pickupLocation, dropLocation, goodsType, weight, date, time, price } = req.body;
 
   try {
+    // Find the number of bookings for the given date
+    const bookingsOnDate = await Booking.find({ date: new Date(date) }).countDocuments();
+
+    // Check if the limit of 10 bookings has been reached
+    if (bookingsOnDate >= 3) {
+      return res.status(400).json({ message: 'No more bookings available for this date. Please choose another date.' });
+    }
+
+    // If less than 10 bookings, create the booking
     const booking = new Booking({
       username,
       email,
@@ -135,17 +155,6 @@ app.post('/api/bookings', async (req, res) => {
   } catch (error) {
     console.error('Error creating booking:', error.message);
     res.status(500).json({ message: 'Error creating booking', error: error.message });
-  }
-});
-
-// Get all bookings (for admin use)
-app.get('/api/bookings', async (req, res) => {
-  try {
-    const bookings = await Booking.find();
-    res.status(200).json(bookings);
-  } catch (error) {
-    console.error('Error fetching bookings:', error.message);
-    res.status(500).json({ message: 'Error fetching bookings', error: error.message });
   }
 });
 
