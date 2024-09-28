@@ -4,7 +4,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 10px 20px;
-  background-color: #333;
+  background-color: #0066cc; /* Lighter blue background */
 }
 
 .navbar-left, .navbar-right {
@@ -20,29 +20,30 @@
 
 .navbar-heading {
   font-size: 24px;
-  color: #fff;
+  color: #fff; /* White text for visibility */
   font-weight: bold;
   margin: 0;
 }
 
 .navbar-link {
-  color: white;
+  color: #ffffff; /* White text */
   text-decoration: none;
   padding: 8px 12px;
   transition: color 0.3s;
 }
 
 .navbar-link:hover {
-  color: #f3a807;
+  color: #f3a807; /* Gold color on hover for contrast */
 }
+
 .navbar-welcome {
   font-size: 14px;
-  color: #ddd; /* Light grey color */
+  color: #ddd; /* Light grey color for welcome message */
 }
 
 /* Logout button styles */
 .logout-button {
-  background-color: #e63946; /* Red background for logout button */
+  background-color: #ff9900; /* Lighter orange for consistency with CTA */
   color: #fff;
   border: none;
   padding: 8px 12px;
@@ -54,5 +55,5 @@
 
 /* Logout button hover effect */
 .logout-button:hover {
-  background-color: #d62828; /* Darker red on hover */
+  background-color: #e68a00; /* Darker orange on hover */
 }

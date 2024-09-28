@@ -1,9 +1,9 @@
-// Admin/AdminDashboard.js
 import React, { useState } from 'react';
-import UserList from '../pages/UserList'; // Adjust the import path as needed
-import BookingList from '../pages/BookingList'; // Adjust the import path as needed
-import AdminRegister from '../Admin/AdminRegister'; // Adjust the import path as needed
-import AdminInvoiceGenerator from '../Admin/AdminInvoiceGenerator'; // Import the new component
+import UserList from '../pages/UserList';
+import BookingList from '../pages/BookingList';
+import AdminRegister from '../Admin/AdminRegister';
+import AdminInvoiceGenerator from '../Admin/AdminInvoiceGenerator';
+import TruckManagement from './TruckManagement'; // Import TruckManagement component
 import './adminDashboard.css';
 
 const AdminDashboard = () => {
@@ -18,7 +18,9 @@ const AdminDashboard = () => {
       case 'register':
         return <AdminRegister />;
       case 'generate-invoice':
-        return <AdminInvoiceGenerator />; // Render the AdminInvoiceGenerator component
+        return <AdminInvoiceGenerator />;
+      case 'truck-management':
+        return <TruckManagement />; // Render the TruckManagement component
       default:
         return <UserList />;
     }
@@ -53,11 +55,15 @@ const AdminDashboard = () => {
           >
             Generate Invoice
           </li>
+          <li
+            className={activePage === 'truck-management' ? 'active' : ''}
+            onClick={() => setActivePage('truck-management')}
+          >
+            Truck Management
+          </li>
         </ul>
       </div>
-      <div className="content">
-        {renderContent()}
-      </div>
+      <div className="content">{renderContent()}</div>
     </div>
   );
 };
