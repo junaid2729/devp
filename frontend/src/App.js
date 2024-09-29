@@ -1,4 +1,3 @@
-// src/App.js
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
 import Navbar from './pages/Navbar';
@@ -13,6 +12,7 @@ import AdminDashboard from './Admin/AdminDashboard'; // Import the AdminDashboar
 import AdminLogin from './Admin/AdminLogin'; // Import the AdminLogin component
 import AdminRegister from './Admin/AdminRegister'; // Import the AdminRegister component
 import ProtectedRoute from './Admin/ProtectedRoute'; // Import the ProtectedRoute component
+import AboutUs from './pages/Aboutus'; // Import AboutUs component
 
 function App() {
   return (
@@ -27,6 +27,7 @@ function App() {
           <Route path="/users" element={<UserList />} />
           <Route path="/bookinglist" element={<BookingList />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/about" element={<AboutUs />} /> {/* Added About Us route */}
           
           {/* Admin */}
           <Route path="/admin-login" element={<AdminLogin />} />

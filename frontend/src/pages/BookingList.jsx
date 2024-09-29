@@ -40,7 +40,6 @@ const BookingList = () => {
               <th>Goods Type</th>
               <th>Weight</th>
               <th>Date</th>
-              <th>Time</th>
               <th>Price</th>
               <th>Invoice</th> {/* Invoice generation column */}
             </tr>
@@ -57,7 +56,6 @@ const BookingList = () => {
                 <td>{booking.goodsType}</td>
                 <td>{booking.weight}</td>
                 <td>{new Date(booking.date).toLocaleDateString()}</td>
-                <td>{booking.time}</td>
                 <td>₹{booking.price}</td>
                 <td>
                   <Invoice bookingData={booking} /> {/* Add invoice generation */}

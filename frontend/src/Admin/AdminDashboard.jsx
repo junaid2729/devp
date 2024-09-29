@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import UserList from '../pages/UserList';
 import BookingList from '../pages/BookingList';
 import AdminRegister from '../Admin/AdminRegister';
-import TruckManagement from './TruckManagement'; // Import TruckManagement component
+// import TruckManagement from './TruckManagement'; // Import TruckManagement component
 import './adminDashboard.css';
 
 const AdminDashboard = () => {
@@ -16,8 +16,8 @@ const AdminDashboard = () => {
         return <BookingList />;
       case 'register':
         return <AdminRegister />;
-      case 'truck-management':
-        return <TruckManagement />; // Render the TruckManagement component
+      // case 'truck-management':
+      //   return <TruckManagement />; // Render the TruckManagement component
       default:
         return <UserList />;
     }
@@ -46,12 +46,12 @@ const AdminDashboard = () => {
           >
             Register Admin
           </li>
-          <li
+          {/* <li
             className={activePage === 'truck-management' ? 'active' : ''}
             onClick={() => setActivePage('truck-management')}
           >
             Truck Management
-          </li>
+          </li> */}
         </ul>
       </div>
       <div className="content">{renderContent()}</div>

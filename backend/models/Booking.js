@@ -57,10 +57,7 @@ const BookingSchema = new mongoose.Schema(
         return date.toISOString().split('T')[0]; // Return only the date part
       },
     },
-    time: {
-      type: String,
-      required: true,
-    },
+    
     price: {
       type: Number,
       required: true,

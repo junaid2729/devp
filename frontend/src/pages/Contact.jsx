@@ -13,7 +13,7 @@ const Contact = () => {
   const [goodsType, setGoodsType] = useState('');
   const [weight, setWeight] = useState('');
   const [date, setDate] = useState('');
-  const [time, setTime] = useState('');
+  // const [time, setTime] = useState('');
   const [price, setPrice] = useState(0);
   const [email, setEmail] = useState(user?.email || '');
   const [username, setUsername] = useState(user?.username || '');
@@ -74,7 +74,6 @@ const Contact = () => {
         goodsType,
         weight,
         date,
-        time,
         price,
         email,
       });
@@ -97,7 +96,6 @@ const Contact = () => {
     goodsType,
     weight,
     date,
-    time,
     price,
   };
 
@@ -208,15 +206,7 @@ const Contact = () => {
               required
             />
           </div>
-          <div className="form-group">
-            <label>Time:</label>
-            <input
-              type="time"
-              value={time}
-              onChange={(e) => setTime(e.target.value)}
-              required
-            />
-          </div>
+          
           <div className="form-group">
             <label>Price:</label>
             <input

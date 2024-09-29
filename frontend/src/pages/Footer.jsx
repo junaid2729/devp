@@ -9,7 +9,7 @@ const Footer = () => {
       <div className="footer0">
         <h1>Transportation Service</h1>
       </div>
-      <div className="footer1">
+      {/* <div className="footer1">
         Connect with us at
         <div className="social-media">
           <a href="#">
@@ -29,8 +29,8 @@ const Footer = () => {
           </a>
         </div>
       </div>
-      <div className="footer2">
-        <div className="services">
+      <div className="footer2"> */}
+        {/* <div className="services">
           <div className="heading">Services</div>
           <div className="div">Return</div>
           <div className="div">Cash Back</div>
@@ -50,10 +50,10 @@ const Footer = () => {
           <div className="div">Privacy Policy</div>
           <div className="div">Terms</div>
           <div className="div">Login</div>
-        </div>
-      </div>
+        </div> */}
+      {/* </div> */}
       <div className="footer3">
-        Copyright © <h4>Rehan Shaikh</h4> 2021-2028
+        Copyright © <h4>Transportation online Service</h4> 2024
       </div>
     </footer>
   );

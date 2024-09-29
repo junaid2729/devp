@@ -43,8 +43,7 @@ const Invoice = ({ bookingData }) => {
       ['Goods Type', goodsType],
       ['Weight', weight],
       ['Date', date],
-      ['Time', time],
-      ['Price', `₹${price}`],
+      ['Price', `${price}`],
     ];
 
     // Add the table to the PDF
