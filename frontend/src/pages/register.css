@@ -1,4 +1,4 @@
-/* frontend/src/components/Register.css */
+/* Base styles for the register form */
 .register-form {
   display: flex;
   flex-direction: column;
@@ -45,4 +45,60 @@
 
 .register-form button:hover {
   background-color: #0056b3; /* Darker blue on hover */
+}
+
+/* Responsive styles */
+
+/* Medium screens (max-width: 768px) */
+@media screen and (max-width: 768px) {
+  .register-form {
+    width: 350px; /* Adjust width for tablets */
+  }
+
+  .register-form h2 {
+    font-size: 22px; /* Slightly smaller heading */
+  }
+
+  .register-form button {
+    font-size: 15px;
+  }
+}
+
+/* Small screens (max-width: 600px) */
+@media screen and (max-width: 600px) {
+  .register-form {
+    width: 90%; /* Use percentage for better scaling */
+    padding: 15px;
+  }
+
+  .register-form h2 {
+    font-size: 20px; /* Smaller heading */
+  }
+
+  .register-form input {
+    padding: 8px;
+    font-size: 13px; /* Smaller input text */
+  }
+
+  .register-form button {
+    font-size: 14px;
+    padding: 8px; /* Adjust button padding */
+  }
+}
+
+/* Extra small screens (max-width: 400px) */
+@media screen and (max-width: 400px) {
+  .register-form {
+    width: 100%; /* Full width for very small screens */
+  }
+
+  .register-form input {
+    font-size: 12px; /* Further reduce input size */
+    padding: 6px;
+  }
+
+  .register-form button {
+    font-size: 13px;
+    padding: 6px;
+  }
 }

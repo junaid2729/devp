@@ -22,7 +22,7 @@
 .form-group input,
 .form-group select {
   padding: 8px;
-  width: 100%;
+  width: 90%;
   border: 1px solid #0066cc; /* Blue border */
   border-radius: 4px;
   transition: border-color 0.3s; /* Smooth transition for focus effect */
@@ -46,4 +46,67 @@
 
 .submit-button:hover {
   background-color: #0056b3; /* Darker blue on hover */
+}
+
+/* Responsive styles */
+
+/* Medium screens (max-width: 768px) */
+@media screen and (max-width: 768px) {
+  .contact-us-container {
+    width: 85%; /* Wider container for medium screens */
+  }
+
+  .form-group label {
+    font-size: 16px; /* Slightly larger font size for labels */
+  }
+
+  .submit-button {
+    padding: 10px; /* Adjust button padding */
+  }
+}
+
+/* Small screens (max-width: 600px) */
+@media screen and (max-width: 600px) {
+  .contact-us-container {
+    width: 95%; /* Full-width container for small screens */
+    padding: 10px; /* Add padding for small screens */
+  }
+
+  .form-group {
+    margin-bottom: 12px; /* Reduce margin for form groups */
+  }
+
+  .form-group label {
+    font-size: 14px; /* Smaller font size for labels */
+  }
+
+  .form-group input,
+  .form-group select {
+    padding: 10px; /* Adjust input and select padding */
+  }
+
+  .submit-button {
+    padding: 10px; /* Adjust button padding */
+    font-size: 14px; /* Smaller font size for button */
+  }
+}
+
+/* Extra small screens (max-width: 400px) */
+@media screen and (max-width: 400px) {
+  .contact-us-container {
+    width: 100%; /* Full width for extra small screens */
+  }
+
+  .form-group label {
+    font-size: 12px; /* Compact font size for labels */
+  }
+
+  .form-group input,
+  .form-group select {
+    font-size: 12px; /* Compact font size for inputs */
+  }
+
+  .submit-button {
+    font-size: 12px; /* Compact font size for button */
+  }
 }

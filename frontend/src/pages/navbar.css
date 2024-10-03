@@ -1,4 +1,4 @@
-/* frontend/src/components/navbar.css */
+/* Base Navbar Styles */
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -56,4 +56,98 @@
 /* Logout button hover effect */
 .logout-button:hover {
   background-color: #e68a00; /* Darker orange on hover */
+}
+
+/* Media Queries for Responsiveness */
+
+/* Large screens (max-width: 1200px) */
+@media screen and (max-width: 1200px) {
+  .navbar-heading {
+    font-size: 22px;
+  }
+
+  .navbar-link {
+    padding: 6px 10px;
+    font-size: 14px;
+  }
+
+  .logout-button {
+    padding: 6px 10px;
+    font-size: 13px;
+  }
+}
+
+/* Medium screens (max-width: 900px) */
+@media screen and (max-width: 900px) {
+  .navbar {
+    padding: 8px 15px;
+  }
+
+  .navbar-heading {
+    font-size: 20px;
+  }
+
+  .navbar-link {
+    padding: 5px 8px;
+    font-size: 13px;
+  }
+
+  .logout-button {
+    padding: 5px 8px;
+    font-size: 12px;
+  }
+}
+
+/* Small screens (max-width: 600px) */
+@media screen and (max-width: 600px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .navbar-center {
+    justify-content: flex-start;
+    margin-top: 10px;
+  }
+
+  .navbar-heading {
+    font-size: 18px;
+  }
+
+  .navbar-link {
+    font-size: 12px;
+    padding: 4px 6px;
+  }
+
+  .logout-button {
+    font-size: 12px;
+    padding: 4px 6px;
+  }
+
+  .navbar-left, .navbar-right {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+  }
+}
+
+/* Extra small screens (max-width: 400px) */
+@media screen and (max-width: 400px) {
+  .navbar-heading {
+    font-size: 16px;
+  }
+
+  .navbar-link {
+    font-size: 11px;
+    padding: 3px 5px;
+  }
+
+  .logout-button {
+    font-size: 11px;
+    padding: 3px 5px;
+  }
+
+  .navbar-welcome {
+    font-size: 12px;
+  }
 }

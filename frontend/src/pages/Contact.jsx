@@ -127,6 +127,7 @@ const Contact = () => {
             <input
               type="text"
               value={pickupLocation}
+              placeholder='Pickup only from pune'
               onChange={(e) => setPickupLocation(e.target.value)}
               required
             />

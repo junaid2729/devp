@@ -1,3 +1,4 @@
+/* Base styles for admin dashboard */
 .admin-dashboard {
   display: flex;
 }
@@ -35,4 +36,51 @@
   flex: 1;
   padding: 20px;
   background-color: #f0f8ff; /* Light blue background */
+}
+
+/* Responsive styles */
+
+/* Medium screens (max-width: 768px) */
+@media screen and (max-width: 768px) {
+  .sidebar {
+    width: 200px;
+    padding: 15px; /* Reduced sidebar padding for medium screens */
+  }
+  
+  .content {
+    padding: 15px; /* Reduced content padding */
+  }
+}
+
+/* Small screens (max-width: 600px) */
+@media screen and (max-width: 600px) {
+  .admin-dashboard {
+    flex-direction: column; /* Stack sidebar and content vertically */
+  }
+
+  .sidebar {
+    width: 100%;
+    height: auto;
+    padding: 10px;
+  }
+
+  .content {
+    padding: 10px; /* Reduced padding for small screens */
+  }
+}
+
+/* Extra small screens (max-width: 400px) */
+@media screen and (max-width: 400px) {
+  .sidebar li {
+    padding: 10px 15px; /* Compact padding for list items */
+    font-size: 14px; /* Smaller font size for narrow screens */
+  }
+
+  .sidebar {
+    padding: 8px;
+  }
+
+  .content {
+    padding: 8px;
+  }
 }

@@ -1,3 +1,11 @@
+/* Base styles */
+body, html {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
 .home {
   font-family: Arial, sans-serif;
   color: #333;
@@ -56,7 +64,6 @@
   border: 2px solid #0066cc; /* Blue border around the whole card */
 }
 
-
 .state-card:hover {
   transform: translateY(-5px); /* Lift effect on hover */
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
@@ -114,4 +121,61 @@
 
 .cta-button:hover {
   background-color: #007acc; /* Slightly darker blue on hover */
+}
+
+/* Responsive Design */
+
+/* Mobile view (up to 600px wide) */
+@media (max-width: 600px) {
+  .header h1 {
+    font-size: 2em;
+  }
+
+  .header p {
+    font-size: 1em;
+  }
+
+  .services h2 {
+    font-size: 1.5em;
+  }
+
+  .state-card {
+    width: 100%; /* Full width on small screens */
+    margin: 10px 0;
+  }
+
+  .cta h2 {
+    font-size: 1.8em;
+  }
+
+  .cta p {
+    font-size: 1em;
+  }
+
+  .cta-button {
+    font-size: 1em;
+    padding: 8px 16px;
+  }
+}
+
+/* Tablet view (up to 1024px wide) */
+@media (max-width: 1024px) {
+  .states {
+    justify-content: center;
+  }
+
+  .state-card {
+    width: 45%; /* Reduce card width for tablets */
+  }
+
+  .cta-button {
+    font-size: 1.1em;
+  }
+}
+
+/* Large screens (above 1024px) */
+@media (min-width: 1025px) {
+  .state-card {
+    width: 300px; /* Fixed width for larger screens */
+  }
 }
