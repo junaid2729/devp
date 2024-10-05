@@ -119,11 +119,6 @@ app.get('/api/bookings', async (req, res) => {
   }
 });
 
-// ----------------------------------
-// Booking Routes
-// ----------------------------------
-
-// Create a booking
 // Create a booking
 app.post('/api/bookings', async (req, res) => {
   const { username, email, pickupLocation, pickupPhone, dropLocation, dropPhone, goodsType, weight, date,  price } = req.body;
@@ -158,6 +153,16 @@ app.post('/api/bookings', async (req, res) => {
     res.status(500).json({ message: 'Error creating booking', error: error.message });
   }
 });
+
+// app.get('/api/user/bookings', authenticateJWT, async (req, res) => {
+//   try {
+//     const bookings = await Booking.find({ user: req.user.id }); // Ensure this references the authenticated user's ID
+//     res.status(200).json(bookings);
+//   } catch (error) {
+//     console.error('Error fetching bookings:', error.message);
+//     res.status(500).json({ message: 'Error fetching bookings', error: error.message });
+//   }
+// });
 
 // ----------------------------------
 // Admin Routes

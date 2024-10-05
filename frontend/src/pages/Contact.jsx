@@ -99,6 +99,16 @@ const Contact = () => {
     price,
   };
 
+  // const fetchUserBookings = async () => {
+  //   try {
+  //     const response = await axios.get(`http://localhost:3001/api/user/bookings`, {
+  //       headers: { Authorization: `Bearer ${user.token}` }, // Assuming you're using token-based auth
+  //     });
+  //     setUserBookings(response.data);
+  //   } catch (error) {
+  //     console.error('Error fetching user bookings:', error);
+  //   }
+  // };
   return (
     <div className="contact-us-container">
       <h2>Book a Truck</h2>

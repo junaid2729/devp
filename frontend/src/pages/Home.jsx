@@ -13,9 +13,9 @@ import kashmirImg from '../pages/assets/kashmir.jpg';
 const Home = () => {
   const states = [
     { name: 'Delhi', img: delhiImg },
-    { name: 'Gujarat', img: gujaratImg },
-    { name: 'Rajasthan', img: rajasthanImg },
-    { name: 'Bihar', img: biharImg },
+    { name: 'Mumbai', img: gujaratImg },
+    { name: 'Gujrat', img: rajasthanImg },
+    { name: 'Kolkatta', img: biharImg },
     { name: 'Karnataka', img: karnatakaImg },
     { name: 'Kashmir', img: kashmirImg },
   ];

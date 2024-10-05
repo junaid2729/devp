@@ -1,8 +1,11 @@
+import React, { useState } from 'react';
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
 import './invoice.css';
 
 const Invoice = ({ bookingData }) => {
+  const [confirmationMessage, setConfirmationMessage] = useState('');
+
   const generateInvoice = () => {
     const {
       username,
@@ -14,7 +17,6 @@ const Invoice = ({ bookingData }) => {
       goodsType,
       weight,
       date,
-      time,
       price,
     } = bookingData;
 
@@ -68,14 +70,25 @@ const Invoice = ({ bookingData }) => {
       },
     });
 
+    // Add the confirmation message below the table
+    doc.setFontSize(12);
+    doc.setTextColor(0); // Reset text color to black
+    doc.text('Your booking was confirmed. We will contact you .', 14, doc.autoTable.previous.finalY + 10);
+
     // Save the PDF
     doc.save('invoice.pdf');
+
+    // Set confirmation message for UI
+    // setConfirmationMessage('Your booking was confirmed. We will contact you .');
   };
 
   return (
-    <button className="invoice-button" onClick={generateInvoice}>
-      Download Invoice
-    </button>
+    <div>
+      <button className="invoice-button" onClick={generateInvoice}>
+        Download Invoice
+      </button>
+      {confirmationMessage && <p className="confirmation-message">{confirmationMessage}</p>}
+    </div>
   );
 };
 

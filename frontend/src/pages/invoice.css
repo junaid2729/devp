@@ -55,3 +55,8 @@
 .invoice-button:hover {
   background-color: #00509e; /* Darker blue on hover */
 }
+.confirmation-message {
+  margin-top: 10px;
+  color: green; /* Change to your preferred color */
+  font-weight: bold;
+}
