@@ -14,7 +14,7 @@ import AdminLogin from './Admin/AdminLogin';
 import AdminRegister from './Admin/AdminRegister';
 import ProtectedRoute from './Admin/ProtectedRoute';
 import AboutUs from './pages/Aboutus';
-// import History from './pages/History'; // Import the History component
+import History from './pages/History'; // Import the History component
 
 function App() {
   return (
@@ -30,7 +30,7 @@ function App() {
           <Route path="/bookinglist" element={<BookingList />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/about" element={<AboutUs />} />
-          {/* <Route path="/history" element={<History />} /> Add route for booking history */}
+          <Route path="/history" element={<History />} /> Add route for booking history
 
           {/* Admin */}
           <Route path="/admin-login" element={<AdminLogin />} />
@@ -41,6 +41,7 @@ function App() {
               <ProtectedRoute>
                 <AdminDashboard />
               </ProtectedRoute>
+              
             } 
           />
         </Routes>

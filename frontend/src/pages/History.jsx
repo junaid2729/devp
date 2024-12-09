@@ -1,74 +1,113 @@
-// src/pages/History.js
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useAuth } from '../context/AuthContext'; // Import the Auth context
-import './history.css'; // Import the CSS file
+import { useAuth } from '../context/AuthContext'; // Assuming you have AuthContext to get logged-in user
+import Invoice from './Invoice'; // Assuming the Invoice component is in the same directory
+import './history.css'; // Ensure this file exists and is properly styled
 
 const History = () => {
-  const { user } = useAuth(); // Get user from Auth context
+  const { user } = useAuth();  // Get the current logged-in user from context
   const [bookings, setBookings] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
+  const [visibleBookings, setVisibleBookings] = useState({}); // State to track visibility of user bookings
 
   useEffect(() => {
     const fetchBookings = async () => {
-      const token = localStorage.getItem('token'); // Get the token from local storage
-
-      if (!token) {
-        setError('No token found. Please log in.');
-        setLoading(false);
-        return;
-      }
-
       try {
-        const response = await axios.get('http://localhost:3001/api/user/bookings', {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        setBookings(response.data); // Set bookings state
-      } catch (err) {
-        setError('Error fetching bookings: ' + err.response?.data?.message || err.message);
+        const response = await axios.get('http://localhost:3001/api/bookings');
+        setBookings(response.data);
+      } catch (error) {
+        console.error('Error fetching bookings:', error);
       } finally {
         setLoading(false);
       }
     };
 
-    if (user) { // Fetch bookings only if user is logged in
-      fetchBookings();
-    } else {
-      setError('Please log in to view your booking history.');
-      setLoading(false);
-    }
-  }, [user]);
+    fetchBookings();
+  }, []);
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
+  // Filter bookings based on the logged-in user
+  const filteredBookings = bookings.filter((booking) => booking.username === user?.username);
 
-  if (error) {
-    return <div>{error}</div>;
-  }
+  // Toggle visibility of bookings for a specific user
+  const toggleBookingsVisibility = (username) => {
+    setVisibleBookings((prev) => ({
+      ...prev,
+      [username]: !prev[username],
+    }));
+  };
 
   return (
     <div className="history-container">
-      <h1>Your Booking History</h1>
-      {bookings.length === 0 ? (
-        <p>No bookings found.</p>
+      <h2>Your Booking History</h2>
+      {loading ? (
+        <p>Loading bookings...</p>
       ) : (
-        <ul className="history-list">
-          {bookings.map((booking) => (
-            <li key={booking._id} className="history-item">
-              <p><strong>Username:</strong> {booking.username}</p>
-              <p><strong>Email:</strong> {booking.email}</p>
-              <p><strong>Pickup Location:</strong> {booking.pickupLocation}</p>
-              <p><strong>Drop Location:</strong> {booking.dropLocation}</p>
-              <p><strong>Date:</strong> {new Date(booking.date).toLocaleDateString()}</p>
-              <p><strong>Price:</strong> ${booking.price}</p>
-              <hr />
-            </li>
-          ))}
-        </ul>
+        <table className="history-table">
+          <thead>
+            <tr>
+              <th>Username</th>
+              <th>Actions</th>
+              <th>Bookings</th>
+            </tr>
+          </thead>
+          <tbody>
+            {/* Group bookings by username */}
+            {Object.entries(
+              filteredBookings.reduce((acc, booking) => {
+                if (!acc[booking.username]) {
+                  acc[booking.username] = [];
+                }
+                acc[booking.username].push(booking);
+                return acc;
+              }, {})
+            ).map(([username, userBookings]) => (
+              <React.Fragment key={username}>
+                <tr>
+                  <td>{username}</td>
+                  <td>
+                    <button onClick={() => toggleBookingsVisibility(username)}>
+                      {visibleBookings[username] ? 'Hide Bookings' : 'Show Bookings'}
+                    </button>
+                  </td>
+                  <td>
+                    {visibleBookings[username] && (
+                      <table className="nested-history-table">
+                        <thead>
+                          <tr>
+                            <th>Email</th>
+                            <th>Pickup Location</th>
+                            <th>Pickup Phone</th>
+                            <th>Drop Location</th>
+                            <th>Drop Phone</th>
+                            <th>Date</th>
+                            <th>Price</th>
+                            <th>Invoice</th> {/* Invoice generation column */}
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {userBookings.map((booking) => (
+                            <tr key={booking._id}>
+                              <td>{booking.email}</td>
+                              <td>{booking.pickupLocation}</td>
+                              <td>{booking.pickupPhone}</td>
+                              <td>{booking.dropLocation}</td>
+                              <td>{booking.dropPhone}</td>
+                              <td>{new Date(booking.date).toLocaleDateString()}</td>
+                              <td>₹{booking.price}</td>
+                              <td>
+                                <Invoice bookingData={booking} />
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    )}
+                  </td>
+                </tr>
+              </React.Fragment>
+            ))}
+          </tbody>
+        </table>
       )}
     </div>
   );

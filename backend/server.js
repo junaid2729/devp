@@ -154,15 +154,6 @@ app.post('/api/bookings', async (req, res) => {
   }
 });
 
-// app.get('/api/user/bookings', authenticateJWT, async (req, res) => {
-//   try {
-//     const bookings = await Booking.find({ user: req.user.id }); // Ensure this references the authenticated user's ID
-//     res.status(200).json(bookings);
-//   } catch (error) {
-//     console.error('Error fetching bookings:', error.message);
-//     res.status(500).json({ message: 'Error fetching bookings', error: error.message });
-//   }
-// });
 
 // ----------------------------------
 // Admin Routes
@@ -209,6 +200,16 @@ app.post('/api/admin/login', async (req, res) => {
   }
 });
 
+// PUT /api/bookings/cancel/:id
+// app.put('/api/bookings/cancel/:id', async (req, res) => {
+//   const { id } = req.params;
+//   try {
+//     const booking = await Booking.findByIdAndUpdate(id, { status: 'Cancelled' }, { new: true });
+//     res.status(200).json(booking);
+//   } catch (error) {
+//     res.status(500).json({ message: 'Error cancelling booking' });
+//   }
+// });
 
 // ----------------------------------
 // Start the Server
