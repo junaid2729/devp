@@ -1,5 +1,3 @@
-// server.js
-
 const express = require('express');
 const dotenv = require('dotenv');
 const mongoose = require('mongoose');
@@ -35,8 +33,29 @@ const User = require('./models/User');
 const Admin = require('./models/admin');
 const Booking = require('./models/Booking');
 
-// Middleware to handle JSON data and enable CORS
-// (Already set up above, so no need to duplicate)
+// Middleware to verify if the user is an admin
+const verifyAdminToken = async (req, res, next) => {
+  const token = req.headers.authorization && req.headers.authorization.split(' ')[1]; // Get the token from Authorization header
+
+  if (!token) {
+    return res.status(403).json({ message: 'No token provided' });
+  }
+
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET); // Verify the token with JWT_SECRET
+
+    // Check if the user is an admin
+    if (!decoded.isAdmin) {
+      return res.status(403).json({ message: 'Not authorized as admin' });
+    }
+
+    req.user = decoded; // Save the decoded token data to the request object
+    next(); // Continue to the next middleware or route handler
+  } catch (error) {
+    console.error('Error verifying token:', error.message);
+    return res.status(401).json({ message: 'Invalid or expired token' });
+  }
+};
 
 // ----------------------------------
 // User Routes
@@ -99,15 +118,15 @@ app.post('/api/auth/login', async (req, res) => {
 });
 
 // Fetch all users (for admin use)
-app.get('/api/users', async (req, res) => {
+app.get('/api/users', verifyAdminToken, async (req, res) => {
   try {
     const users = await User.find({}, '-password'); // Exclude password from response for security
     res.status(200).json(users);
   } catch (error) {
-    // console.error('Error fetching users:', error.message);
     res.status(500).json({ message: 'Error fetching users', error: error.message });
   }
 });
+
 // Fetch all bookings
 app.get('/api/bookings', async (req, res) => {
   try {
@@ -121,7 +140,7 @@ app.get('/api/bookings', async (req, res) => {
 
 // Create a booking
 app.post('/api/bookings', async (req, res) => {
-  const { username, email, pickupLocation, pickupPhone, dropLocation, dropPhone, goodsType, weight, date,  price } = req.body;
+  const { username, email, pickupLocation, pickupPhone, dropLocation, dropPhone, goodsType, weight, date, price } = req.body;
 
   try {
     // Find the number of bookings for the given date
@@ -154,10 +173,6 @@ app.post('/api/bookings', async (req, res) => {
   }
 });
 
-
-// ----------------------------------
-// Admin Routes
-// ----------------------------------
 // Admin Registration Route
 app.post('/api/admin/register', async (req, res) => {
   const { username, password } = req.body;
@@ -200,21 +215,7 @@ app.post('/api/admin/login', async (req, res) => {
   }
 });
 
-// PUT /api/bookings/cancel/:id
-// app.put('/api/bookings/cancel/:id', async (req, res) => {
-//   const { id } = req.params;
-//   try {
-//     const booking = await Booking.findByIdAndUpdate(id, { status: 'Cancelled' }, { new: true });
-//     res.status(200).json(booking);
-//   } catch (error) {
-//     res.status(500).json({ message: 'Error cancelling booking' });
-//   }
-// });
 
-// ----------------------------------
 // Start the Server
-// ----------------------------------
-
 const PORT = process.env.PORT || 3001;
-
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

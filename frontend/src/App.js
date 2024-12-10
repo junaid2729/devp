@@ -12,7 +12,7 @@ import BookingList from './pages/BookingList';
 import AdminDashboard from './Admin/AdminDashboard';
 import AdminLogin from './Admin/AdminLogin';
 import AdminRegister from './Admin/AdminRegister';
-import ProtectedRoute from './Admin/ProtectedRoute';
+import ProtectedRoute from './Admin/ProtectedRoute'; // Import the ProtectedRoute component
 import AboutUs from './pages/Aboutus';
 import History from './pages/History'; // Import the History component
 
@@ -26,22 +26,39 @@ function App() {
           <Route path="/home" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/users" element={<UserList />} />
-          <Route path="/bookinglist" element={<BookingList />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/about" element={<AboutUs />} />
-          <Route path="/history" element={<History />} /> Add route for booking history
+          <Route path="/history" element={<History />} /> 
 
-          {/* Admin */}
+          {/* Admin Protected Routes */}
           <Route path="/admin-login" element={<AdminLogin />} />
           <Route path="/admin-register" element={<AdminRegister />} />
+
+          {/* Protect User List and Booking List */}
+          <Route 
+            path="/users" 
+            element={
+              <ProtectedRoute>
+                <UserList />
+              </ProtectedRoute>
+            } 
+          />
+          <Route 
+            path="/bookinglist" 
+            element={
+              <ProtectedRoute>
+                <BookingList />
+              </ProtectedRoute>
+            } 
+          />
+
+          {/* Admin Dashboard - Protected */}
           <Route 
             path="/admin-dashboard" 
             element={
               <ProtectedRoute>
                 <AdminDashboard />
               </ProtectedRoute>
-              
             } 
           />
         </Routes>

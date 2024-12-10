@@ -9,24 +9,39 @@ export const useAuth = () => useContext(AuthContext);
 
 // AuthProvider component to wrap your app
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null); // State for regular user
-  const [admin, setAdmin] = useState(null); // State for admin
+  const [user, setUser] = useState(null);  // State for regular user
+  const [admin, setAdmin] = useState(null);  // State for admin
 
-  // Function to load user from token when the app initializes
+  // Function to load user and admin from token when the app initializes
   const loadUserFromToken = async () => {
-    const token = localStorage.getItem('token');
-    if (token) {
+    const userToken = localStorage.getItem('token');  // For regular user
+    const adminToken = localStorage.getItem('adminToken');  // For admin
+
+    if (adminToken) {
       try {
-        // Fetch user details based on the token
-        const response = await axios.get('http://localhost:3001/api/auth/me', {
+        // Fetch admin details based on the admin token
+        const response = await axios.get('http://localhost:3001/api/admin/me', {
           headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${adminToken}`,
           },
         });
-        setUser(response.data.user); // Set the user data from the response
+        setAdmin(response.data.admin); // Set admin data
+      } catch (error) {
+        console.error('Error loading admin from token:', error);
+        logout();  // Log out if token is invalid or expired
+      }
+    } else if (userToken) {
+      try {
+        // Fetch regular user details based on the user token
+        const response = await axios.get('http://localhost:3001/api/auth/me', {
+          headers: {
+            Authorization: `Bearer ${userToken}`,
+          },
+        });
+        setUser(response.data.user); // Set user data
       } catch (error) {
         console.error('Error loading user from token:', error);
-        logout(); // Log out if token is invalid or expired
+        logout();  // Log out if token is invalid or expired
       }
     }
   };
@@ -63,7 +78,7 @@ export const AuthProvider = ({ children }) => {
       });
       setUser(response.data.user); // Set the logged-in user
       localStorage.setItem('token', response.data.token); // Save token in local storage
-      // alert('Login successful!');
+      alert('Login successful!');
     } catch (error) {
       console.error('User login failed:', error);
       alert('Login failed! Please check your credentials.');
@@ -86,8 +101,8 @@ export const AuthProvider = ({ children }) => {
     try {
       const response = await axios.post('http://localhost:3001/api/admin/login', { username, password });
       setAdmin(response.data.admin); // Set the logged-in admin
-      localStorage.setItem('token', response.data.token); // Save token in local storage
-      // alert('Admin login successful!');
+      localStorage.setItem('adminToken', response.data.token); // Save admin token in local storage
+      alert('Admin login successful!');
     } catch (error) {
       console.error('Admin login failed:', error);
       alert('Admin login failed! Please check your credentials.');
@@ -98,8 +113,9 @@ export const AuthProvider = ({ children }) => {
   const logout = () => {
     setUser(null);
     setAdmin(null);
-    localStorage.removeItem('token'); // Remove token from local storage
-    // alert('Logged out successfully.');
+    localStorage.removeItem('token'); // Remove user token from local storage
+    localStorage.removeItem('adminToken'); // Remove admin token from local storage
+    alert('Logged out successfully.');
   };
 
   // Auth context value
